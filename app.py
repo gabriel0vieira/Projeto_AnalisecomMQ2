@@ -46,8 +46,8 @@ with abas[0]:
     st.header("📋 Resumo das Leituras")
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total de Registros", len(df))
-    col2.metric("Média v_adc", f"{df['v_adc'].mean():.3f}")
-    col3.metric("Máx. raw_value", int(df["raw_value"].max()))
+    col2.metric("Média leitura_volts", f"{df['v_adc'].mean():.3f}")
+    col3.metric("Máx. intensidade_gas", int(df["raw_value"].max()))
     col4.metric("Alarmes Ativos", df["alarme"].sum())
 
     st.markdown("### Distribuição dos Valores Captados")
@@ -137,3 +137,4 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+

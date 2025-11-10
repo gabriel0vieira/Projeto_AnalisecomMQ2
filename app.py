@@ -123,23 +123,17 @@ with abas[2]:
 with abas[3]:
     st.header("ℹ️ Sobre o Projeto")
     st.markdown('''
-    O projeto **Monitoramento de Gases com ESP32 e Sensor MQ-2** foi desenvolvido para acompanhar, em tempo real, a presença de gases inflamáveis e fumaça no ambiente.  
+O projeto **Monitoramento de Gases com ESP32 e Sensor MQ-2** foi desenvolvido para acompanhar, em tempo real, a presença de gases inflamáveis e fumaça no ambiente.  
 
-    **Componentes Utilizados:**
-    - ESP32: Microcontrolador responsável pela leitura e transmissão dos dados.
-    - MQ-2: Sensor que detecta gases como GLP, CO e fumaça.
-    - Buzzer: Emite alerta sonoro quando o limite de segurança é ultrapassado.
-    - PostgreSQL: Banco de dados para armazenamento e análise histórica.
+**Componentes Utilizados:**
+- ESP32: Microcontrolador responsável pela leitura e transmissão dos dados.
+- MQ-2: Sensor que detecta gases como GLP, CO e fumaça.
+- Buzzer: Emite alerta sonoro quando o limite de segurança é ultrapassado.
+- PostgreSQL: Banco de dados para armazenamento e análise histórica.
 
-    **Objetivo:**  
-    Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contribuindo para **segurança e prevenção de riscos**.
+**Objetivo:**  
+Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contribuindo para **segurança e prevenção de riscos**.
 
-    **Desenvolvido por:** *Gabriel de Almeida Vieira*  
-    **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
-    ''')
-
-
-    **Desenvolvido por:** Gabriel de Almeida Vieira  
-    **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
-    ''')
-
+**Desenvolvido por:** *Gabriel de Almeida Vieira*  
+**Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
+''')

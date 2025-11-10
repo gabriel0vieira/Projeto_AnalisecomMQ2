@@ -3,13 +3,22 @@ import pandas as pd
 import psycopg2
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly.express as px
 
-# Configuração da página
+# ---------------------------
+# CONFIGURAÇÃO DA PÁGINA
+# ---------------------------
 st.set_page_config(page_title="Monitoramento de Gases - ESP32", layout="wide")
+st.title("💨 Monitoramento Inteligente de Gases com ESP32 e Sensor MQ-2")
 
-st.title("💨 Monitoramento de Gases com ESP32 e Sensor MQ-2")
+st.markdown("""
+Bem-vindo ao painel interativo de **análise e monitoramento ambiental**.  
+Aqui você pode acompanhar a evolução das leituras do sensor MQ-2, entender padrões e identificar situações de risco.
+""")
 
-# Função para carregar dados do PostgreSQL
+# ---------------------------
+# FUNÇÃO PARA CARREGAR DADOS
+# ---------------------------
 @st.cache_data
 def carregar_dados():
     conn = psycopg2.connect(
@@ -18,64 +27,119 @@ def carregar_dados():
         user="2412120027_Gabriel",
         password="2412120027_Gabriel"
     )
-    query = "SELECT * FROM sensores_schema.mq2_data;"
+    query = "SELECT * FROM sensores_schema.mq2_data ORDER BY timestamp;"
     df = pd.read_sql(query, conn)
     conn.close()
     return df
 
 df = carregar_dados()
 
-# Criar abas
-abas = st.tabs(["📋 Dados", "📈 Gráficos", "🚨 Alarmes", "ℹ️ Sobre o Projeto"])
+# ---------------------------
+# CRIAÇÃO DAS ABAS
+# ---------------------------
+abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e Riscos", "ℹ️ Sobre o Projeto"])
 
-# Aba 1 - Dados
+# ---------------------------
+# ABA 1 - VISÃO GERAL
+# ---------------------------
 with abas[0]:
-    st.subheader("📋 Últimas Leituras do Sensor")
-    st.dataframe(df.tail(20))
-    st.write(f"Total de leituras: {len(df)}")
+    st.header("📋 Resumo das Leituras")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total de Registros", len(df))
+    col2.metric("Média v_adc", f"{df['v_adc'].mean():.3f}")
+    col3.metric("Máx. raw_value", int(df["raw_value"].max()))
+    col4.metric("Alarmes Ativos", df["alarme"].sum())
 
-# Aba 2 - Gráficos
+    st.markdown("### Distribuição dos Valores Captados")
+    fig = px.histogram(df, x="raw_value", nbins=30, title="Distribuição de Intensidade dos Gases", color_discrete_sequence=["#0083B8"])
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("""
+    🔍 **Interpretação:**  
+    O histograma mostra a frequência dos valores captados pelo sensor MQ-2.  
+    Concentrações mais altas podem indicar momentos de presença de fumaça ou gases inflamáveis.
+    """)
+
+# ---------------------------
+# ABA 2 - ANÁLISE TEMPORAL
+# ---------------------------
 with abas[1]:
-    st.subheader("📊 Distribuição dos Valores (raw_value)")
-    fig1, ax1 = plt.subplots(figsize=(8, 4))
-    sns.histplot(df["raw_value"], bins=30, kde=True, ax=ax1)
-    st.pyplot(fig1)
+    st.header("📈 Análise de Tendência Temporal")
 
-    st.subheader("📈 Tendência Temporal (v_adc)")
     df["media_movel"] = df["v_adc"].rolling(window=10).mean()
-    fig2, ax2 = plt.subplots(figsize=(10, 4))
-    ax2.plot(df["timestamp"], df["v_adc"], label="Leitura Original", alpha=0.5)
-    ax2.plot(df["timestamp"], df["media_movel"], color="red", label="Média Móvel (10 amostras)")
-    ax2.legend()
-    st.pyplot(fig2)
 
-# Aba 3 - Alarmes
+    fig2 = px.line(df, x="timestamp", y=["v_adc", "media_movel"],
+                   labels={"timestamp": "Tempo", "value": "Leitura (v_adc)"},
+                   title="Evolução das Leituras no Tempo",
+                   color_discrete_map={"v_adc": "#1f77b4", "media_movel": "#d62728"})
+    st.plotly_chart(fig2, use_container_width=True)
+
+    st.markdown("""
+    🧠 **Insight Analítico:**  
+    A linha vermelha representa a **média móvel de 10 amostras**, ajudando a suavizar ruídos e identificar **tendências**.  
+    Oscilações bruscas podem indicar **variação rápida na concentração de gases**, exigindo atenção.
+    """)
+
+    st.subheader("Correlação entre Variáveis")
+    fig_corr, ax = plt.subplots(figsize=(6, 4))
+    sns.heatmap(df.corr(numeric_only=True), annot=True, cmap="coolwarm", ax=ax)
+    st.pyplot(fig_corr)
+
+    st.markdown("""
+    📊 **Análise de Correlação:**  
+    Este mapa mostra o grau de relação entre as variáveis numéricas.  
+    Correlações positivas fortes podem indicar sensores redundantes ou padrões consistentes de leitura.
+    """)
+
+# ---------------------------
+# ABA 3 - ALERTAS E RISCOS
+# ---------------------------
 with abas[2]:
-    st.subheader("🚨 Leituras com Alarme Ativo")
-    df_alarm = df[df["alarme"] == True]
-    st.dataframe(df_alarm.tail(10))
+    st.header("🚨 Monitoramento de Alertas")
 
-    st.subheader("Proporção de Leituras com Alarme")
+    df_alarm = df[df["alarme"] == True]
+    st.metric("Total de Leituras com Alarme", len(df_alarm))
+
+    if len(df_alarm) > 0:
+        fig3 = px.scatter(df_alarm, x="timestamp", y="v_adc",
+                          color="alarme", title="Momentos de Alarme Ativo",
+                          color_discrete_map={True: "red"})
+        st.plotly_chart(fig3, use_container_width=True)
+    else:
+        st.info("✅ Nenhum alarme detectado nas leituras atuais.")
+
     alarme_counts = df["alarme"].value_counts()
     st.bar_chart(alarme_counts)
 
-    st.subheader("Correlação entre Variáveis")
-    fig3, ax3 = plt.subplots(figsize=(6, 4))
-    sns.heatmap(df.corr(numeric_only=True), annot=True, cmap="coolwarm", ax=ax3)
-    st.pyplot(fig3)
+    st.markdown("""
+    ⚠️ **Interpretação:**  
+    Cada ponto vermelho indica um momento em que o sistema **acionou o alarme**.  
+    É importante monitorar a frequência desses eventos para **avaliar a segurança do ambiente**.
+    """)
 
-# Aba 4 - Sobre
+# ---------------------------
+# ABA 4 - SOBRE
+# ---------------------------
 with abas[3]:
+    st.header("ℹ️ Sobre o Projeto")
     st.markdown('''
-    ### ℹ️ Sobre o Projeto
-    Este dashboard apresenta os dados coletados pelo sistema de **Monitoramento de Gases com ESP32 e Sensor MQ-2**.
+    O projeto **Monitoramento de Gases com ESP32 e Sensor MQ-2** foi desenvolvido para acompanhar, em tempo real, a presença de gases inflamáveis e fumaça no ambiente.  
 
-    **Componentes principais:**
-    - ESP32: microcontrolador responsável pela coleta e envio dos dados.
-    - Sensor MQ-2: detecta gases inflamáveis e fumaça.
-    - Buzzer: dispara um alarme sonoro quando o limite é ultrapassado.
-    - Banco de Dados PostgreSQL: armazena todas as leituras para análise posterior.
+    **Componentes Utilizados:**
+    - ESP32: Microcontrolador responsável pela leitura e transmissão dos dados.
+    - MQ-2: Sensor que detecta gases como GLP, CO e fumaça.
+    - Buzzer: Emite alerta sonoro quando o limite de segurança é ultrapassado.
+    - PostgreSQL: Banco de dados para armazenamento e análise histórica.
+
+    **Objetivo:**  
+    Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contribuindo para **segurança e prevenção de riscos**.
+
+    **Desenvolvido por:** *Gabriel de Almeida Vieira*  
+    **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
+    ''')
+
 
     **Desenvolvido por:** Gabriel de Almeida Vieira  
     **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
     ''')
+

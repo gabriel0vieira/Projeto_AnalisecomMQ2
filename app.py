@@ -51,7 +51,7 @@ with abas[0]:
     col4.metric("Alarmes Ativos", df["alarme"].sum())
 
     st.markdown("### Distribuição dos Valores Captados")
-    fig = px.histogram(df, x="intensidade_gas", nbins=30, title="Distribuição de Intensidade dos Gases", color_discrete_sequence=["#0083B8"])
+    fig = px.histogram(df, x="raw_value", nbins=30, title="Distribuição de Intensidade dos Gases", color_discrete_sequence=["#0083B8"])
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("""

@@ -42,7 +42,7 @@ with abas[0]:
 
     st.subheader("Distribuição dos valores do sensor MQ-2")
 
-    fig, ax = plt.subplots(figsize=(6, 4))   # <-- tamanho reduzido
+    fig, ax = plt.subplots(figsize=(6, 4))
 
     sns.histplot(df['raw_value'], bins=30, kde=True, ax=ax)
 
@@ -82,14 +82,15 @@ with abas[1]:
 
     st.markdown("""
     📊 **Análise de Correlação:**  
-    Este mapa mostra o grau de relação entre as variáveis numéricas.  
-    Correlações positivas fortes podem indicar sensores redundantes ou padrões consistentes de leitura.
+    Este gráfico mostra como a leitura bruta do sensor se relaciona com a tensão gerada.  
+    Uma relação consistente indica comportamento previsível do sensor MQ-2.
     """)
 
 # ---------------------------
 # ABA 3 - ALERTAS E RISCOS
 # ---------------------------
-with abas[3]:
+with abas[2]:
+    st.header("🚨 Alertas e Riscos")
 
     st.subheader("📊 Estatísticas Gerais")
 
@@ -123,16 +124,3 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -33,7 +33,7 @@ df = carregar_dados()
 # ---------------------------
 # CRIAÇÃO DAS ABAS
 # ---------------------------
-abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e Riscos", "ℹ️ Sobre o Projeto"])
+abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "📊 Estatísticas Gerais", "ℹ️ Sobre o Projeto"])
 
 # ---------------------------
 # ABA 1 - VISÃO GERAL
@@ -90,7 +90,7 @@ with abas[1]:
 # ABA 3 - ALERTAS E RISCOS
 # ---------------------------
 with abas[2]:
-    st.header("📊 Estatísticas Gerais")
+    st.header(" Estatísticas Gerais")
 
     total = len(df)
     alarme_count = df['alarme'].sum()
@@ -122,4 +122,5 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 

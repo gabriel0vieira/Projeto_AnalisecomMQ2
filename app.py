@@ -97,10 +97,22 @@ with abas[2]:
     media_tensao = df['v_adc'].mean()
     max_tensao = df['v_adc'].max()
 
+    # --- Estatísticas adicionais que você pediu ---
+    desvio_tensao = df['v_adc'].std()  # (3) Desvio padrão
+    tempo_total = df['timestamp'].max() - df['timestamp'].min()  # (7) Tempo total monitorado
+    correlacao = df['raw_value'].corr(df['v_adc'])  # (9) Correlação numérica
+
     st.write(f"**Total de leituras:** {total}")
     st.write(f"**Leituras com alarme:** {alarme_count} ({alarme_count/total*100:.2f}%)")
     st.write(f"**Média de tensão:** {media_tensao:.2f} V")
     st.write(f"**Máximo valor detectado:** {max_tensao:.2f} V")
+
+    st.write("---")
+    st.write("### 📌 Estatísticas adicionais")
+
+    st.write(f"**(3) Desvio padrão da tensão:** {desvio_tensao:.4f}")
+    st.write(f"**(7) Tempo total monitorado:** {tempo_total}")
+    st.write(f"**(9) Correlação raw_value × v_adc:** {correlacao:.4f}")
 
 # ---------------------------
 # ABA 4 - SOBRE
@@ -122,5 +134,6 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 

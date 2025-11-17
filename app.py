@@ -62,14 +62,23 @@ with abas[0]:
 # ABA 2 - ANÁLISE TEMPORAL
 # ---------------------------
 with abas[1]:
-    st.header("📈Correlação entre Variáveis")
+    st.header("📈 Correlação entre Variáveis")
 
-    plt.figure(figsize=(6,4))
-sns.scatterplot(x='raw_value', y='v_adc', data=df, alpha=0.6)
-plt.title('Relação entre leitura bruta e tensão (v_adc)')
-plt.xlabel('Valor bruto (raw_value)')
-plt.ylabel('Tensão (V)')
-plt.show()
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    sns.scatterplot(
+        data=df,
+        x='raw_value',
+        y='v_adc',
+        alpha=0.6,
+        ax=ax
+    )
+
+    ax.set_title('Relação entre leitura bruta e tensão (v_adc)')
+    ax.set_xlabel('Valor bruto (raw_value)')
+    ax.set_ylabel('Tensão (V)')
+
+    st.pyplot(fig)
 
     st.markdown("""
     📊 **Análise de Correlação:**  
@@ -123,6 +132,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

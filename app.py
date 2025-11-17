@@ -62,26 +62,14 @@ with abas[0]:
 # ABA 2 - ANÁLISE TEMPORAL
 # ---------------------------
 with abas[1]:
-    st.header("📈 Análise de Tendência Temporal")
+    st.header("📈Correlação entre Variáveis")
 
-    df["media_movel"] = df["v_adc"].rolling(window=10).mean()
-
-    fig2 = px.line(df, x="timestamp", y=["v_adc", "media_movel"],
-                   labels={"timestamp": "Tempo", "value": "Leitura (v_adc)"},
-                   title="Evolução das Leituras no Tempo",
-                   color_discrete_map={"v_adc": "#1f77b4", "media_movel": "#d62728"})
-    st.plotly_chart(fig2, use_container_width=True)
-
-    st.markdown("""
-    🧠 **Insight Analítico:**  
-    A linha vermelha representa a **média móvel de 10 amostras**, ajudando a suavizar ruídos e identificar **tendências**.  
-    Oscilações bruscas podem indicar **variação rápida na concentração de gases**, exigindo atenção.
-    """)
-
-    st.subheader("Correlação entre Variáveis")
-    fig_corr, ax = plt.subplots(figsize=(6, 4))
-    sns.heatmap(df.corr(numeric_only=True), annot=True, cmap="coolwarm", ax=ax)
-    st.pyplot(fig_corr)
+    plt.figure(figsize=(6,4))
+sns.scatterplot(x='raw_value', y='v_adc', data=df, alpha=0.6)
+plt.title('Relação entre leitura bruta e tensão (v_adc)')
+plt.xlabel('Valor bruto (raw_value)')
+plt.ylabel('Tensão (V)')
+plt.show()
 
     st.markdown("""
     📊 **Análise de Correlação:**  
@@ -135,6 +123,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

@@ -11,10 +11,6 @@ import plotly.express as px
 st.set_page_config(page_title="Monitoramento de Gases - ESP32", layout="wide")
 st.title("Monitoramento Inteligente de Gases com ESP32 e Sensor MQ-2")
 
-st.markdown("""
-Bem-vindo ao painel interativo de **análise e monitoramento ambiental**.  
-Aqui você pode acompanhar a evolução das leituras do sensor MQ-2, entender padrões e identificar situações de risco.
-""")
 
 # ---------------------------
 # FUNÇÃO PARA CARREGAR DADOS
@@ -139,6 +135,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

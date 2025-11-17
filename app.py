@@ -64,7 +64,7 @@ with abas[0]:
 with abas[1]:
     st.header("📈 Correlação entre Variáveis")
 
-    fig, ax = plt.subplots(figsize=(6, 4))
+    fig, ax = plt.subplots(figsize=(5, 3))
 
     sns.scatterplot(
         data=df,
@@ -132,6 +132,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

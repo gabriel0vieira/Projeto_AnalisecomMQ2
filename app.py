@@ -34,7 +34,7 @@ df = carregar_dados()
 # ---------------------------
 # CRIAÇÃO DAS ABAS
 # ---------------------------
-abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "📊 Estatísticas Gerais", "ℹ️ Sobre o Projeto"])
+abas = st.tabs(["📊 Visão Geral", "📈 Correlação entre Variáveis", "📊 Estatísticas Gerais", "ℹ️ Sobre o Projeto"])
 
 
 # ============================================================
@@ -166,6 +166,7 @@ a presença de gases inflamáveis e fumaça no ambiente.
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

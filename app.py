@@ -89,28 +89,19 @@ with abas[1]:
 # ---------------------------
 # ABA 3 - ALERTAS E RISCOS
 # ---------------------------
-with abas[2]:
-    st.header("🚨 Monitoramento de Alertas")
+with abas[3]:
 
-    df_alarm = df[df["alarme"] == True]
-    st.metric("Total de Leituras com Alarme", len(df_alarm))
+    st.subheader("📊 Estatísticas Gerais")
 
-    if len(df_alarm) > 0:
-        fig3 = px.scatter(df_alarm, x="timestamp", y="v_adc",
-                          color="alarme", title="Momentos de Alarme Ativo",
-                          color_discrete_map={True: "red"})
-        st.plotly_chart(fig3, use_container_width=True)
-    else:
-        st.info("✅ Nenhum alarme detectado nas leituras atuais.")
+    total = len(df)
+    alarme_count = df['alarme'].sum()
+    media_tensao = df['v_adc'].mean()
+    max_tensao = df['v_adc'].max()
 
-    alarme_counts = df["alarme"].value_counts()
-    st.bar_chart(alarme_counts)
-
-    st.markdown("""
-    ⚠️ **Interpretação:**  
-    Cada ponto vermelho indica um momento em que o sistema **acionou o alarme**.  
-    É importante monitorar a frequência desses eventos para **avaliar a segurança do ambiente**.
-    """)
+    st.write(f"**Total de leituras:** {total}")
+    st.write(f"**Leituras com alarme:** {alarme_count} ({alarme_count/total*100:.2f}%)")
+    st.write(f"**Média de tensão:** {media_tensao:.2f} V")
+    st.write(f"**Máximo valor detectado:** {max_tensao:.2f} V")
 
 # ---------------------------
 # ABA 4 - SOBRE
@@ -132,6 +123,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

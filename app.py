@@ -43,16 +43,23 @@ abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e R
 # ABA 1 - VISÃO GERAL
 # ---------------------------
 with abas[0]:
-    st.header("📋 Resumo das Leituras")
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total de Registros", len(df))
-    col2.metric("Média leitura_volts", f"{df['v_adc'].mean():.3f}")
-    col3.metric("Máx. intensidade_gas", int(df["raw_value"].max()))
-    col4.metric("Alarmes Ativos", df["alarme"].sum())
 
-    st.markdown("### Distribuição dos Valores Captados")
-    fig = px.histogram(df, x="raw_value", nbins=30, title="Distribuição de Intensidade dos Gases", color_discrete_sequence=["#0083B8"])
-    st.plotly_chart(fig, use_container_width=True)
+    # Gráfico
+    plt.figure(figsize=(8,5))
+    sns.regplot(
+        data=df,
+        x="temperatura",
+        y="umidade",
+        scatter_kws={"s": 70},   # tamanho dos pontos
+        line_kws={"linewidth": 2}  # espessura da linha
+    )
+
+    plt.title("Correlação entre Temperatura e Umidade")
+    plt.xlabel("Temperatura (°C)")
+    plt.ylabel("Umidade (%)")
+    plt.tight_layout()
+
+    st.pyplot(plt)  # MOSTRAR O GRÁFICO NA ABA
 
     st.markdown("""
     🔍 **Interpretação:**  
@@ -137,6 +144,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

@@ -46,7 +46,7 @@ with abas[0]:
 
     st.subheader("Distribuição dos valores do sensor MQ-2")
 
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig, ax = plt.subplots(figsize=(6, 3))   # <-- tamanho reduzido
 
     sns.histplot(df['raw_value'], bins=30, kde=True, ax=ax)
 
@@ -139,6 +139,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

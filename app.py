@@ -33,7 +33,7 @@ df = carregar_dados()
 # ---------------------------
 # CRIAÇÃO DAS ABAS
 # ---------------------------
-abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e Riscos", "ℹ️ Sobre o Projeto"])
+abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "📊 Estatísticas Gerais", "ℹ️ Sobre o Projeto"])
 
 # ---------------------------
 # ABA 1 - VISÃO GERAL
@@ -122,6 +122,7 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

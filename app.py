@@ -19,9 +19,9 @@ st.title("Monitoramento Inteligente de Gases com ESP32 e Sensor MQ-2")
 def carregar_dados():
     conn = psycopg2.connect(
         host="dataiesb.iesbtech.com.br",
-        dbname="2412120027_GGabriel",
-        user="2412120027_GGabriel",
-        password="2412120027_GGabriel"
+        dbname="2412120027_Gabriel",
+        user="2412120027_Gabriel",
+        password="2412120027_Gabriel"
     )
     query = "SELECT * FROM sensores_schema.mq2_data ORDER BY timestamp;"
     df = pd.read_sql(query, conn)
@@ -166,6 +166,7 @@ a presença de gases inflamáveis e fumaça no ambiente.
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 
 

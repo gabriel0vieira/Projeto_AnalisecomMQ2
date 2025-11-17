@@ -44,22 +44,17 @@ abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e R
 # ---------------------------
 with abas[0]:
 
-    # Gráfico
-    plt.figure(figsize=(8,5))
-    sns.regplot(
-        data=df,
-        x="temperatura",
-        y="umidade",
-        scatter_kws={"s": 70},   # tamanho dos pontos
-        line_kws={"linewidth": 2}  # espessura da linha
-    )
+    st.subheader("Distribuição dos valores do sensor MQ-2")
 
-    plt.title("Correlação entre Temperatura e Umidade")
-    plt.xlabel("Temperatura (°C)")
-    plt.ylabel("Umidade (%)")
-    plt.tight_layout()
+    fig, ax = plt.subplots(figsize=(8, 4))
 
-    st.pyplot(plt)  # MOSTRAR O GRÁFICO NA ABA
+    sns.histplot(df['raw_value'], bins=30, kde=True, ax=ax)
+
+    ax.set_title("Distribuição dos valores do sensor MQ-2")
+    ax.set_xlabel("Valor bruto (raw_value)")
+    ax.set_ylabel("Frequência")
+
+    st.pyplot(fig)
 
     st.markdown("""
     🔍 **Interpretação:**  

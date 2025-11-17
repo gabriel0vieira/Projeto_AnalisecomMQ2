@@ -33,7 +33,7 @@ df = carregar_dados()
 # ---------------------------
 # CRIAÇÃO DAS ABAS
 # ---------------------------
-abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "📊 Estatísticas Gerais", "ℹ️ Sobre o Projeto"])
+abas = st.tabs(["📊 Visão Geral", "📈 Análise Temporal", "🔥 Alertas e Riscos", "ℹ️ Sobre o Projeto"])
 
 # ---------------------------
 # ABA 1 - VISÃO GERAL
@@ -90,12 +90,19 @@ with abas[1]:
 # ABA 3 - ALERTAS E RISCOS
 # ---------------------------
 with abas[2]:
-    st.header(" Estatísticas Gerais")
+    st.header("🚨 Alertas e Riscos")
+
+    st.subheader("📊 Estatísticas Gerais")
 
     total = len(df)
     alarme_count = df['alarme'].sum()
     media_tensao = df['v_adc'].mean()
     max_tensao = df['v_adc'].max()
+
+    st.write(f"**Total de leituras:** {total}")
+    st.write(f"**Leituras com alarme:** {alarme_count} ({alarme_count/total*100:.2f}%)")
+    st.write(f"**Média de tensão:** {media_tensao:.2f} V")
+    st.write(f"**Máximo valor detectado:** {max_tensao:.2f} V")
 
 # ---------------------------
 # ABA 4 - SOBRE
@@ -117,7 +124,5 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
-
-
 
 

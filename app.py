@@ -87,12 +87,10 @@ with abas[1]:
     """)
 
 # ---------------------------
-# ABA 3 - ALERTAS E RISCOS
+# ABA 3 -  Estatísticas Gerais
 # ---------------------------
 with abas[2]:
-    st.header("🚨 Alertas e Riscos")
-
-    st.subheader("📊 Estatísticas Gerais")
+    st.header("📊 Estatísticas Gerais")
 
     total = len(df)
     alarme_count = df['alarme'].sum()
@@ -124,5 +122,6 @@ Fornecer uma ferramenta visual e analítica para monitoramento ambiental, contri
 **Desenvolvido por:** *Gabriel de Almeida Vieira*  
 **Disciplina:** HMDC680 - Projeto Integrador Aplicado em CD & IA II  
 ''')
+
 
 

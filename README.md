@@ -57,5 +57,5 @@ O sistema permite acompanhamento em tempo real e análise estatística das leitu
 
 ## 🧠 Estrutura do Projeto
 
-- `api.py` → Aplicação principal (Streamlit)  
+- `app.py` → Aplicação principal (Streamlit)  
 - `requirements.txt` → Dependências do projeto  

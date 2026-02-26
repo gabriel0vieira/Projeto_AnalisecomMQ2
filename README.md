@@ -1,85 +1,70 @@
-🔥 Monitoramento Inteligente de Gases com ESP32 e Sensor MQ-2
-🌐 Dashboard Online
+# 🔥 Monitoramento Inteligente de Gases com ESP32 e Sensor MQ-2
 
-🚀 Acessar Dashboard Online
+## 🌐 Dashboard Online
 
-🎯 Sobre o Projeto
+[🚀 Acessar Dashboard Online](https://asz9strabhwu7rura4sy4v.streamlit.app)
 
-Este projeto foi desenvolvido para monitorar a presença de gases inflamáveis e fumaça utilizando ESP32 e o sensor MQ-2.
+---
 
-Os dados coletados são armazenados em PostgreSQL e analisados através de um dashboard interativo desenvolvido com Streamlit.
+## 🎯 Sobre o Projeto
+
+Este projeto foi desenvolvido para monitorar a presença de gases inflamáveis e fumaça utilizando **ESP32** e o **sensor MQ-2**.
+
+Os dados coletados são armazenados em **PostgreSQL** e analisados através de um **dashboard interativo desenvolvido com Streamlit**.
 
 O sistema permite acompanhamento em tempo real e análise estatística das leituras do sensor.
 
-🛠 Tecnologias Utilizadas
+---
 
-Python
+## 🛠 Tecnologias Utilizadas
 
-Streamlit
+- Python  
+- Streamlit  
+- PostgreSQL  
+- Pandas  
+- Seaborn  
+- Matplotlib  
+- Plotly  
+- ESP32  
+- Sensor MQ-2  
 
-PostgreSQL
+---
 
-Pandas
+## 📊 Funcionalidades do Dashboard
 
-Seaborn
+### 📌 1. Visão Geral
 
-Matplotlib
+- Histograma da distribuição das leituras do sensor  
+- Boxplot para análise de dispersão  
 
-Plotly
+### 📌 2. Correlação entre Variáveis
 
-ESP32
+- Gráfico de dispersão entre leitura bruta (`raw_value`) e tensão (`v_adc`)  
 
-Sensor MQ-2
+### 📌 3. Estatísticas Gerais
 
-📊 Funcionalidades do Dashboard
-📌 1. Visão Geral
+- Total de leituras registradas  
+- Quantidade de alarmes acionados  
+- Média e máximo de tensão  
+- Indicador visual de risco (Gauge Chart interativo)  
 
-Histograma da distribuição das leituras do sensor
+### 📌 4. Informações do Projeto
 
-Boxplot para análise de dispersão
+- Componentes utilizados  
+- Descrição técnica do sistema  
 
-📌 2. Correlação entre Variáveis
+---
 
-Gráfico de dispersão entre leitura bruta (raw_value) e tensão (v_adc)
+## 🧠 Estrutura do Projeto
 
-📌 3. Estatísticas Gerais
+- `api.py` → Aplicação principal (Streamlit)  
+- `requirements.txt` → Dependências do projeto  
 
-Total de leituras registradas
+---
 
-Quantidade de alarmes acionados
+## ▶️ Como Executar Localmente
 
-Média e máximo de tensão
+### 1️⃣ Instale as dependências:
 
-Indicador visual de risco (Gauge Chart interativo)
-
-📌 4. Informações do Projeto
-
-Componentes utilizados
-
-Descrição técnica do sistema
-
-🧠 Estrutura do Projeto
-
-api.py → Aplicação principal (Streamlit)
-
-requirements.txt → Dependências do projeto
-
-▶️ Como Executar Localmente
-
-Instale as dependências:
-
+```bash
 pip install -r requirements.txt
-
-Execute o projeto:
-
-streamlit run api.py
-🗄 Banco de Dados
-
-Os dados são armazenados em PostgreSQL e consultados via psycopg2.
-As credenciais foram configuradas para ambiente acadêmico.
-
-👨‍💻 Autor
-
-Gabriel de Almeida Vieira
-
-Projeto desenvolvido para a disciplina Projeto Integrador Aplicado em Ciência de Dados e IA II.

@@ -59,12 +59,3 @@ O sistema permite acompanhamento em tempo real e análise estatística das leitu
 
 - `api.py` → Aplicação principal (Streamlit)  
 - `requirements.txt` → Dependências do projeto  
-
----
-
-## ▶️ Como Executar Localmente
-
-### 1️⃣ Instale as dependências:
-
-```bash
-pip install -r requirements.txt
